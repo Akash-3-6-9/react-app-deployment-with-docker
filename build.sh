@@ -1,7 +1,8 @@
 #!/bin/bash
 
 #login into DockerHub:
-docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
+#docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
+echo "$DOCKER_PASS" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 #stopping existing container:
 docker stop react
@@ -14,5 +15,6 @@ docker build -t react-ci/cd .
 docker run -d -it --name react -p 80:80 react-ci/cd
 
 #pushing the image to dockerhub:
-docker tag react-ci/cd naveen712/react-app:ci-cd
-docker push naveen712/react-app:ci-cd
+docker tag react-ci/cd halli098/neofinity
+docker push halli098/neofinity
+

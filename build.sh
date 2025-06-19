@@ -15,6 +15,9 @@ docker build -t react-ci/cd .
 docker run -d -it --name react -p 80:80 react-ci/cd
 
 #pushing the image to dockerhub:
-docker tag react-ci/cd halli098/neofinity
-docker push halli098/neofinity
+# Tag the image correctly for your repository
+docker tag react-ci/cd halli098/neofinity:ci-cd
+
+# Push to your Docker Hub repo
+docker push halli098/neofinity:ci-cd
 

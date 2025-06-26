@@ -2,21 +2,15 @@ pipeline {
   agent any
 
   environment {
-    DOCKER_USERNAME = credentials('docker-hub-creds').username
-    DOCKER_PASS     = credentials('docker-hub-creds').password
+    DOCKER_CREDS = credentials('docker-hub-creds')  // 👈 this binds username and password
   }
 
   stages {
-    stage('Set permissions') {
-      steps {
-        sh 'chmod +x build.sh'
-      }
-    }
-
     stage('Run build') {
       steps {
         sh '''
-          echo "$DOCKER_PASS" | docker login -u "$DOCKER_USERNAME" --password-stdin
+          echo "$DOCKER_CREDS_PSW" | docker login -u "$DOCKER_CREDS_USR" --password-stdin
+          chmod +x build.sh
           ./build.sh
         '''
       }
